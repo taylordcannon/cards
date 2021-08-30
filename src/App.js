@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  function fetchFromServer() {
+
+    fetch("http://localhost:3000")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (myJson) {
+        console.log(myJson);
+      })
+      .catch(function (error) {
+        console.log("Error: " + error);
+      });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={fetchFromServer}>
+        Click
+      </button>
     </div>
   );
 }
