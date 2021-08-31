@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [playerSeat, setPlayerSeat] = useState(undefined)
 
   function fetchFromServer() {
-
     fetch("http://localhost:3000")
       .then(function (response) {
         return response.json();
@@ -16,11 +17,25 @@ function App() {
       });
   }
 
+  function joinSeat(seatNumber) {
+      setPlayerSeat(seatNumber)
+      fetchFromServer()
+      console.log(seatNumber)
+  }
+
   return (
     <div className="App">
-      <button onClick={fetchFromServer}>
-        Click
-      </button>
+      {playerSeat === undefined && <div>
+        <button onClick={() => joinSeat(1)}>
+          Join Seat 1
+        </button>
+        <button onClick={() => joinSeat(2)}>
+          Join Seat 2
+        </button>
+      </div>}
+      <p>
+        Seat: {playerSeat}
+      </p>
     </div>
   );
 }
